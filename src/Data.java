@@ -195,8 +195,9 @@ class Data {
 		 * @param attribute
 		 * @return
 		 */
-		/*String computePrototype(ArraySet idList,DiscreteAttribute attribute) {
-			
-		}*/
+		String computePrototype(ArraySet idList,DiscreteAttribute attribute) {
+			String ciao="hsha";
+			return  ciao;
+		}
 }
 
