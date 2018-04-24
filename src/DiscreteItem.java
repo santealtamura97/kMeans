@@ -8,7 +8,13 @@ class DiscreteItem extends Item {
 	DiscreteItem(DiscreteAttribute attribute,String value){
 		super(attribute,value);
 	}
+	
+	/**
+	 * Valuta la distanza tra due attributi discreti che corrisponde a 1
+	 * se sono diversi, a 0 se sono uguali
+	 */
 	double distance(Object a) {
+		//verifica se il valore dell'attributo sia uguale a quello di input
 		if(getValue().equals(a))
 			return 0;
 		else

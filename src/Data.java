@@ -1,6 +1,5 @@
 import java.util.Random;
 class Data {
-	// Le visibilità di classi , attributi e metodi devono essere decise dagli studenti	
 		Object data [][];
 		int numberOfExamples;
 		Attribute attributeSet[];
@@ -64,18 +63,18 @@ class Data {
 			outLookValues[1]="Rain";
 			outLookValues[2]="Sunny";
 			
-			temperatureValues[0]="Hot";
-			temperatureValues[1]="Mild";
-			temperatureValues[2]="Cool";
+			temperatureValues[0]="Cool";
+			temperatureValues[1]="Hot";
+			temperatureValues[2]="Mild";
 			
 			humidityValues[0]="High";
 			humidityValues[1]="Normal";
 			
-			windValues[0]="Weak";
-			windValues[1]="Strong";
+			windValues[0]="Strong";
+			windValues[1]="Weak";
 			
-			playTennisValues[0]="Yes";
-			playTennisValues[1]="No";
+			playTennisValues[0]="No";
+			playTennisValues[1]="Yes";
 			
 			
 			attributeSet[0] = new DiscreteAttribute("Outlook",0, outLookValues);
@@ -137,7 +136,7 @@ class Data {
 		}
 		
 		/**
-		 * 
+		 * Sceglie i centroidi casualmente
 		 * @param k numero di cluster da generare
 		 * @return array di k interi rappresentanti gli indici di riga in data per le tuple inizialmente scelte come centroidi
 		 */
@@ -196,8 +195,15 @@ class Data {
 		 * @return
 		 */
 		String computePrototype(ArraySet idList,DiscreteAttribute attribute) {
-			String ciao="hsha";
-			return  ciao;
+			String moreFrequentValue=null;
+			int maxFrequency=0;
+			for(int i=0;i<attribute.getNumberOfDistinctValues();i++) {
+				if(attribute.frequency(this, idList, attribute.getValue(i))>=maxFrequency) {
+					maxFrequency=attribute.frequency(this, idList, attribute.getValue(i));
+					moreFrequentValue=attribute.getValue(i);
+				}
+			}
+			return moreFrequentValue;
 		}
 }
 

@@ -39,6 +39,6 @@ abstract class Item {
 	 * @param clusteredData insieme di indici delle righe delle matrice in data che formano il cluster
 	 */
 	void update(Data data,ArraySet clusteredData) {
-		
+		value=data.computePrototype(clusteredData, attribute);
 	}
 }

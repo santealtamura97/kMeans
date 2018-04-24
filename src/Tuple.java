@@ -1,5 +1,5 @@
 /**
- * <p>Description: rappresenta una tupla coma una coppia attributo-valore
+ * <p>Description: rappresenta una tupla come una coppia attributo-valore
  * @author sante
  *
  */
@@ -14,11 +14,11 @@ class Tuple {
 		tuple=new Item[size];
 	}
 	
-	private int getLength() {
+	int getLength() {
 		return tuple.length;
 	}
 	
-	private Item get(int i) {
+	Item get(int i) {
 		return tuple[i];
 	}
 	
@@ -26,6 +26,13 @@ class Tuple {
 		tuple[i]=c;
 	}
 	
+	/**
+	 * Determina la distanza tra la tupla riferita da obj e la tupla corrente(riferita da this).
+	 * La distanza è ottenuta come la somma delle distanze tra gli item in posizioni eguali nelle
+	 * due tuple.
+	 * @param obj
+	 * @return
+	 */
 	double getDistance(Tuple obj) {
 		double dist=0;
 		for(int i=0;i<getLength();i++) {
@@ -45,6 +52,7 @@ class Tuple {
 	double avgDistance(Data data, int clusteredData[]){ 
 		double p=0.0,sumD=0.0; 
 		for(int i=0;i<clusteredData.length;i++){ 
+			//data.getItemSet(clusteredData[i]) mi restituisce la tupla di indice memorizzato in clusteredData[i]
 			double d= getDistance(data.getItemSet(clusteredData[i])); 
 			sumD+=d; 
 		}

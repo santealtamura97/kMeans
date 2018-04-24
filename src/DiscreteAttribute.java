@@ -41,20 +41,13 @@ class DiscreteAttribute extends Attribute {
 	 */
 	int frequency(Data data,ArraySet idList,String v) {
 		int numberOccurrences=0;
-		int r=0; int c;
+		int r=0; 
 		while(r<data.numberOfExamples)
 		{
 			if(idList.get(r))
 			{
-				c=0;
-				while(c<data.attributeSet.length)
-				{
-					if(data.getAttributeValue(r,c).equals(v))
-					{
-						numberOccurrences++;
-					}
-					c++;
-				}			
+					if(data.getAttributeValue(r,getIndex()).equals(v))
+						numberOccurrences++;		
 			}
 			r++;
 		}
