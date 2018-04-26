@@ -15,9 +15,9 @@ class DiscreteItem extends Item {
 	 */
 	double distance(Object a) {
 		//verifica se il valore dell'attributo sia uguale a quello di input
-		if(getValue().equals(a))
+		if(this.getValue()==a.toString())
 			return 0;
-		else
-			return 1;
+		else 
+			return 1;	
 	}
 }

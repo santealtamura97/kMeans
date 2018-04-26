@@ -22,7 +22,7 @@ public class ClusterSet {
 	
 	/**
 	 * Sceglie i centroidi,crea un cluster per ogni centroide e lo memorizza in C
-	 * @param data
+	 * @param data riferimento ad un oggetto Data
 	 */
 	void initializeCentroids(Data data) {
 		//array che memorizza gli indici di riga dei centroidi
@@ -66,7 +66,7 @@ public class ClusterSet {
 	
 	/**
 	 * Identifica e restituisce il cluster a cui la tupla rappresentate l'esempio 
-	 * identificato da id. Se la tupla non è inclusa in  nessun cluster restituisce null.
+	 * identificato da id appartiene. Se la tupla non è inclusa in  nessun cluster restituisce null.
 	 * @param id indice di una riga della matrice in Data
 	 * @return
 	 */
@@ -81,21 +81,21 @@ public class ClusterSet {
 	/**
 	 * Restituisce una stringa fatta da ciascun centroide dell'insieme dei cluster
 	 */
-	/*public String toString() {
+	public String toString() {
 		String str="";
 		for (int j=0;j<i;j++) {
 			str=str+" "+C[j].toString();
 		}
 		return str;
-	}*/
+	}
 	
 	public String toString(Data data) {
 		String str="";
 		for(int i=0;i<C.length;i++) {
 			if(C[i]!=null) {
-				str+=i+":"+C[i].toString(data)+"\n";
+				str+=i+":"+C[i].toString(data) +"\n";
 			}
 		}
-		return str;
+	return str;
 	}
 }

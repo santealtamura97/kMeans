@@ -30,13 +30,13 @@ class Tuple {
 	 * Determina la distanza tra la tupla riferita da obj e la tupla corrente(riferita da this).
 	 * La distanza è ottenuta come la somma delle distanze tra gli item in posizioni eguali nelle
 	 * due tuple.
-	 * @param obj
+	 * @param obj 
 	 * @return
 	 */
-	double getDistance(Tuple obj) {
+	 double getDistance(Tuple obj) {
 		double dist=0;
-		for(int i=0;i<getLength();i++) {
-			dist=dist+this.get(i).distance(obj.get(i));
+		for(int i=0;i<this.getLength();i++) {
+			dist+=this.get(i).distance(obj.get(i));
 		}
 		return dist;
 	}
