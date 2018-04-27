@@ -140,7 +140,7 @@ class Data {
 		 * @param k numero di cluster da generare
 		 * @return array di k interi rappresentanti gli indici di riga in data per le tuple inizialmente scelte come centroidi
 		 */
-		int[] sampling(int k) {
+		 int[] sampling(int k) {
 			int centroidIndexes[]=new int[k];
 			//sceglie a caso k centroidi differenti in data
 			Random rand=new Random();
@@ -194,7 +194,7 @@ class Data {
 		 * @param attribute
 		 * @return
 		 */
-		String computePrototype(ArraySet idList,DiscreteAttribute attribute) {
+		private String computePrototype(ArraySet idList,DiscreteAttribute attribute) {
 			String moreFrequentValue=null;
 			int maxFrequency=0;
 			for(int i=0;i<attribute.getNumberOfDistinctValues();i++) {

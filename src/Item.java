@@ -20,7 +20,7 @@ abstract class Item {
 		return attribute;
 	}
 	
-	 Object getValue() {
+	Object getValue() {
 		return value;
 	}
 	

@@ -40,7 +40,7 @@ public class ClusterSet {
 	 * @param tuple riferimento ad un oggetto Tuple
 	 * @return cluster più "vicino" alla tupla passata
 	 */
-	Cluster nearestCluster(Tuple tuple) {
+		Cluster nearestCluster(Tuple tuple) {
 		int j=0;
 		double minDistance=get(j).getCentroid().getDistance(tuple);
 		Cluster nearestCluster=get(j);
