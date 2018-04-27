@@ -1,3 +1,5 @@
+package data;
+
 /**
  * Estende la classe Item e rappresenta una coppia Attributo,valore discreto.
  * Esempio Outlook="Sunny"

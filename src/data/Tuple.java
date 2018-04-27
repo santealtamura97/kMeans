@@ -1,9 +1,10 @@
+package data;
 /**
  * <p>Description: rappresenta una tupla come una coppia attributo-valore
  * @author sante
  *
  */
-class Tuple {
+public class Tuple {
 	private Item[] tuple;
 	
 	/**
@@ -14,11 +15,11 @@ class Tuple {
 		tuple=new Item[size];
 	}
 	
-	int getLength() {
+	public int getLength() {
 		return tuple.length;
 	}
 	
-	Item get(int i) {
+	public Item get(int i) {
 		return tuple[i];
 	}
 	
@@ -33,7 +34,7 @@ class Tuple {
 	 * @param obj 
 	 * @return
 	 */
-	 double getDistance(Tuple obj) {
+	 public double getDistance(Tuple obj) {
 		double dist=0;
 		for(int i=0;i<this.getLength();i++) {
 			dist+=this.get(i).distance(obj.get(i));
@@ -49,7 +50,7 @@ class Tuple {
 	 * @param clusteredData indice di riga
 	 * @return
 	 */
-	double avgDistance(Data data, int clusteredData[]){ 
+	public double avgDistance(Data data, int clusteredData[]){ 
 		double p=0.0,sumD=0.0; 
 		for(int i=0;i<clusteredData.length;i++){ 
 			//data.getItemSet(clusteredData[i]) mi restituisce la tupla di indice memorizzato in clusteredData[i]

@@ -1,3 +1,5 @@
+package mining;
+import data.Data;
 
 public class KMeansMiner {
 	private ClusterSet C;
@@ -5,7 +7,7 @@ public class KMeansMiner {
 	 * Crea l'oggetto array riferito da C
 	 * @param k numero di cluster da generare
 	 */
-	KMeansMiner(int k){
+	public KMeansMiner(int k){
 		C=new ClusterSet(k);
 	}
 	
@@ -13,7 +15,7 @@ public class KMeansMiner {
 	 * Restituisce C
 	 * @return C
 	 */
-	ClusterSet getC() {
+	public ClusterSet getC() {
 		return C;
 	}
 	
@@ -22,7 +24,7 @@ public class KMeansMiner {
 	 * @param data riferimento ad oggetto Data
 	 * @return numero di iterazioni eseguite
 	 */
-	int kmeans(Data data) {
+	public int kmeans(Data data) {
 		int numberOfIterations=0; 
 		//STEP 1   
 		C.initializeCentroids(data); 

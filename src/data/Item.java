@@ -1,8 +1,11 @@
+package data;
+import utility.ArraySet;
+
 /**
  * <p>Description:Modella un generico item(coppia (attributo,valore),per esempio Outlook="Sunny");
  * @author sante
  */
-abstract class Item {
+public abstract class Item {
 	private Attribute attribute; //attributo coinvolto nell'item
 	private Object value; //valore assegnato all'attributo
 	
@@ -38,7 +41,7 @@ abstract class Item {
 	 * @param data riferimento ad un oggetto di classe Data
 	 * @param clusteredData insieme di indici delle righe delle matrice in data che formano il cluster
 	 */
-	void update(Data data,ArraySet clusteredData) {
+	public void update(Data data,ArraySet clusteredData) {
 		value=data.computePrototype(clusteredData, attribute);
 	}
 }

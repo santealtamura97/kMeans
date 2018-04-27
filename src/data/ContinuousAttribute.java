@@ -1,3 +1,5 @@
+package data;
+
 /**
  * <p>Description:Estende la classe Attribute e modella un attributo continuo(numerico).
  * Tale classe include i metodi per la “normalizzazione” del dominio dell'attributo nell'intervallo [0,1] 
