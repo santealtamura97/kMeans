@@ -1,3 +1,6 @@
+package data;
+import utility.ArraySet;
+
 /**
  * <p>Description: estende la classe Attribute e rappresenta un attributo discreto(categorico)
  * @author sante
@@ -42,7 +45,7 @@ class DiscreteAttribute extends Attribute {
 	int frequency(Data data,ArraySet idList,String v) {
 		int numberOccurrences=0;
 		int r=0; 
-		while(r<data.numberOfExamples)
+		while(r<data.getNumberOfExamples())
 		{
 			if(idList.get(r))
 			{

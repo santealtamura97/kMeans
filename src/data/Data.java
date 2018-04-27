@@ -1,11 +1,15 @@
+package data;
 import java.util.Random;
-class Data {
-		Object data [][];
-		int numberOfExamples;
-		Attribute attributeSet[];
+
+import utility.ArraySet;
+public class Data {
+		private Object data [][];
+		private int numberOfExamples;
+		private int distinctTuple;
+		private Attribute attributeSet[];
 		
 		
-		Data(){
+		 	public Data(){
 			//data
 			
 			data = new Object [14][5];
@@ -83,17 +87,19 @@ class Data {
 			attributeSet[3] = new DiscreteAttribute("Wind",3,windValues);
 			attributeSet[4] = new DiscreteAttribute("PlayTennis",4,playTennisValues);
 			
+			distinctTuple=countDistinctTuples(); 
+			
 		}
 		
-		int getNumberOfExamples(){
+		public int getNumberOfExamples(){
 			return numberOfExamples;
 		}
 		
-		int getNumberOfAttributes(){
+		public int getNumberOfAttributes(){
 			return attributeSet.length;
 		}
 		
-		Object getAttributeValue(int exampleIndex, int attributeIndex){
+		public Object getAttributeValue(int exampleIndex, int attributeIndex){
 			return data[exampleIndex][attributeIndex];
 		}
 		
@@ -108,7 +114,7 @@ class Data {
 			for(i=0;i<getNumberOfAttributes();i++)
 				 schemeTable=schemeTable+attributeSet[i].toString()+",";
 			for(i=0;i<getNumberOfExamples();i++) {
-				schemeTable=schemeTable+"\n"+(i+1)+":";
+				schemeTable=schemeTable+"\n"+(i)+":";
 				for(int j=0;j<getNumberOfAttributes();j++) {
 					schemeTable=schemeTable+getAttributeValue(i,j)+",";
 				}
@@ -128,7 +134,7 @@ class Data {
 		 * @param Index indice di riga
 		 * @return
 		 */
-		Tuple getItemSet(int Index) {
+		public Tuple getItemSet(int Index) {
 			Tuple tuple=new Tuple(attributeSet.length);
 			for(int i=0;i<attributeSet.length;i++)
 				tuple.add(new DiscreteItem((DiscreteAttribute)attributeSet[i],(String)data[Index][i]),i);
@@ -140,7 +146,7 @@ class Data {
 		 * @param k numero di cluster da generare
 		 * @return array di k interi rappresentanti gli indici di riga in data per le tuple inizialmente scelte come centroidi
 		 */
-		 int[] sampling(int k) {
+		 public int[] sampling(int k) {
 			int centroidIndexes[]=new int[k];
 			//sceglie a caso k centroidi differenti in data
 			Random rand=new Random();
@@ -174,6 +180,37 @@ class Data {
 				if(getAttributeValue(i,k)!=getAttributeValue(j,k)) {
 					return false;
 				}	
+			}
+			return true;
+		}
+		
+		/**
+		 * Conta il numero di transazioni distinte memorizzate in data
+		 * @return Numero di  transazioni distinte memorizzate nella matrice data
+		 */
+		private int countDistinctTuples() {
+			int distinctTuples=0;
+			int indexOfDistinctTuples[]=new int[getNumberOfExamples()];
+			for (int i=0;i<getNumberOfExamples();i++) {
+				if(isDistinct(i,indexOfDistinctTuples)) {
+					indexOfDistinctTuples[distinctTuples]=i;
+					distinctTuples++;
+				}	
+			}
+			return distinctTuples;
+		}
+		
+		/**
+		 * Ritorna vero se l'indice i non è contenuto in indexOfDistinctTuples
+		 * @param i indice di riga di una tupla
+		 * @param indexOfDistinctTuples array in cui sono memorizzati gli indici delle righe distinte
+		 * @return 
+		 */
+		private boolean isDistinct(int i,int indexOfDistinctTuples[]) {
+			for(int j=0;j<indexOfDistinctTuples.length;j++) {
+				if(compare(i,indexOfDistinctTuples[j])) {
+					return false;
+				}
 			}
 			return true;
 		}

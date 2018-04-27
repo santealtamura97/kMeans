@@ -1,3 +1,4 @@
+package data;
 /**
  * <p>Description:la classe Attributo modella le entità attributo,
  * non può essere istanziata e ha lo scopo di essere richiamata 
