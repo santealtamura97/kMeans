@@ -1,5 +1,6 @@
 package mining;
 import data.Data;
+import data.OutOfRangeSampleSize;
 import data.Tuple;
 
 public class ClusterSet {
@@ -27,7 +28,7 @@ public class ClusterSet {
 	 * Sceglie i centroidi,crea un cluster per ogni centroide e lo memorizza in C
 	 * @param data riferimento ad un oggetto Data
 	 */
-	void initializeCentroids(Data data) {
+	void initializeCentroids(Data data) throws OutOfRangeSampleSize{
 		//array che memorizza gli indici di riga dei centroidi
 		int centroidIndexes[]=data.sampling(C.length);
 		//per ogni indice prende la tupla che corrisponde e quell'indice(centroide) e crea un cluster e lo memorizza in C
