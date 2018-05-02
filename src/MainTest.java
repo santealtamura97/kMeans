@@ -7,6 +7,10 @@ import data.OutOfRangeSampleSize;
 public class MainTest {
 	/**Nella guarded zone puo' essere generata un'eccezione di tipo OutOfRangeSampleSize
 	 * che viene raccolta dal gestore dell'eccezione e stampa un messaggio di errore.
+	 * 
+	 * 
+	 * Puo' essere generata anche un'eccezione di tipo NegativeArraySizeException che viene
+	 * raccolta dal gestore dell'eccezione e stampa un messaggio di errore.
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -15,7 +19,7 @@ public class MainTest {
 			Data data =new Data();
 			System.out.println(data);
 			System.out.println("Inserisci k:");
-			int k;
+			int k;	
 			try {
 				k=Keyboard.readInt();
 				KMeansMiner kmeans=new KMeansMiner(k);
@@ -24,9 +28,14 @@ public class MainTest {
 				System.out.println(kmeans.getC().toString(data));
 			}catch(OutOfRangeSampleSize e) {
 				System.err.println(e.toString());
+			}catch(NegativeArraySizeException e) {
+				System.err.println("\nIl numero k di cluster inserito "
+						+ "da tastiera non puo' essere negativo");
 			}
-				System.out.println("Vuoi ripetere l'esecuzione?(y/n)");
-				rip=Keyboard.readChar();
-		}while(rip=='y' || rip=='Y');
+			System.out.println("Vuoi ripetere l'esecuzione?(y/n)");
+			rip=Keyboard.readChar();
+			
+			
+		}while(rip =='y' || rip =='Y');
 	}
 }

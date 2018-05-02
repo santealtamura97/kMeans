@@ -147,10 +147,10 @@ public class Data {
 		 * @return array di k interi rappresentanti gli indici di riga in data per le tuple inizialmente scelte come centroidi
 		 */
 		 public int[] sampling(int k) throws OutOfRangeSampleSize{
-			if(k<=0 || k>distinctTuple) {
+			if(k==0 || k>distinctTuple) {
 				throw new OutOfRangeSampleSize();
-			}
-			int centroidIndexes[]=new int[k];
+			}else {
+				int centroidIndexes[]=new int[k];
 			//sceglie a caso k centroidi differenti in data
 			Random rand=new Random();
 			//inizializza il generatore di numeri casuali. Imposta il generatore su un punto di partenza casuale
@@ -172,6 +172,7 @@ public class Data {
 				centroidIndexes[i]=c;
 			}
 			return centroidIndexes;
+			}	
 		}
 		/**
 		 * Restituisce vero se le due righe di data contengono gli stessi valori,falso altrimenti
