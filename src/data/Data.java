@@ -1,14 +1,27 @@
 package data;
 import java.util.Random;
 
+/**
+ * <p>Description:La classe Data modella l'insieme di transazioni (o tuple)
+ * @author sante
+ */
 import utility.ArraySet;
 public class Data {
-		private Object data [][];
+		private Object data [][]; // una matrice nXm di tipo Object dove ogni riga modella una transazioni 
 		private int numberOfExamples;
 		private int distinctTuple;
 		private Attribute attributeSet[];
 		
 		
+			/**
+			 * Inizializza la matrice data [ ][ ] con transazioni di esempio  
+			 * (in questo momento, 14 esempi e 5 attributi come riportato nella 
+			 * tabella sottostante);  Inizializza explanatorySet creando cinque 
+			 * oggetti di tipo DiscreteAttribute, uno per ciascun attributo  
+			 * (nella tabella sottostante). Attenzione a modellare correttamente, 
+			 * nome, indice e dominio di ciascun attributo. 
+			 * Inizializza numberOfExamples 
+			 */
 		 	public Data(){
 			//data
 			
@@ -91,19 +104,37 @@ public class Data {
 			
 		}
 		
+		/**
+		 * restituisce numberOfExamples
+		 * @return cardinalita' dell'insieme di transazioni
+		 */
 		public int getNumberOfExamples(){
 			return numberOfExamples;
 		}
 		
+		/**
+		 * resituisce la dimensione di attributeSet
+		 * @return cardinalita' dell'insieme degli attributi
+		 */
 		public int getNumberOfAttributes(){
 			return attributeSet.length;
 		}
 		
+		/**
+		 * Restituisce data[exampleIndex][attributeIndex]
+		 * @param exampleIndex indice di riga in riferimento alla matrice memorizzata in data
+		 * @param attributeIndex indice di colonna in riferimento alla matrice memorizzata in data
+		 * @return  valore assunto in data dall'attributo in posizione attributeIndex,nella riga in posizione exampleIndex 
+		 */
 		public Object getAttributeValue(int exampleIndex, int attributeIndex){
 			return data[exampleIndex][attributeIndex];
 		}
 		
-		Attribute[] getAttribute(){
+		/**
+		 * 
+		 * @return
+		 */
+		Attribute[] getAttributeSchema(){
 			return attributeSet;
 		}
 		
