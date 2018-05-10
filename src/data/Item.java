@@ -1,5 +1,8 @@
 package data;
-import utility.ArraySet;
+
+import java.util.Set;
+
+
 
 /**
  * <p>Description:Modella un generico item(coppia (attributo,valore),per esempio Outlook="Sunny");
@@ -41,7 +44,7 @@ public abstract class Item {
 	 * @param data riferimento ad un oggetto di classe Data
 	 * @param clusteredData insieme di indici delle righe delle matrice in data che formano il cluster
 	 */
-	public void update(Data data,ArraySet clusteredData) {
+	public void update(Data data,Set<Integer> clusteredData) {
 		value=data.computePrototype(clusteredData, attribute);
 	}
 }

@@ -1,5 +1,10 @@
 package data;
 
+/**
+ * Modella un'eccezione controllata da considerare qualora il numero k di cluster inserito
+ * da tastiera sia maggiore rispetto al numero di controidi generabili dall'insieme di transazioni.
+ * @author sante
+ */
 public class OutOfRangeSampleSize extends Exception {
 	/**
 	 * Default serial version id

@@ -1,17 +1,17 @@
 package data;
 import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeSet;
-
 
 /**
  * <p>Description:La classe Data modella l'insieme di transazioni (o tuple)
  * @author sante
  */
-import utility.ArraySet;
 public class Data {
 		private List<Example> data = new ArrayList<Example>();
 		private int numberOfExamples;
@@ -252,7 +252,11 @@ public class Data {
 			return attributeSet;
 		}*/
 		
-		
+		/**
+		 * Crea una stringa in cui memorizza lo schema della tabella e le transazioni memorizzate in data,
+		 * opportunamente enumerate
+		 * @return stringa che modella lo stato dell'oggetto
+		 */
 		public String toString(){
 			String schemeTable=new String();
 			int i;
@@ -268,11 +272,6 @@ public class Data {
 			
 		}
 
-		public static void main(String args[]){
-			Data trainingSet=new Data();
-			System.out.println(trainingSet);
-		}
-		
 		/**
 		 * Crea e restituisce un oggetto di Tuple che modella come sequenza
 		 * di coppie Attributo-valore la i-esima riga in data
@@ -340,7 +339,7 @@ public class Data {
 		 * @param attribute attributo rispetto al quale calcolare il prototipo(centroide)
 		 * @return valore centroide rispetto ad attribute
 		 */
-		Object computePrototype(ArraySet idList,Attribute attribute) {
+		Object computePrototype(Set<Integer> idList,Attribute attribute) {
 			return computePrototype(idList,(DiscreteAttribute)attribute);
 		}
 		
@@ -351,7 +350,7 @@ public class Data {
 		 * @param attribute
 		 * @return
 		 */
-		private String computePrototype(ArraySet idList,DiscreteAttribute attribute) {
+		private String computePrototype(Set<Integer> idList,DiscreteAttribute attribute) {
 			String moreFrequentValue="";
 			String currentValue="";
 			int maxFrequency=0;

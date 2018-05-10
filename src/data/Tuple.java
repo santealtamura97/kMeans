@@ -23,6 +23,11 @@ public class Tuple {
 		return tuple[i];
 	}
 	
+	/**
+	 * Memorizza c in tuple[i]
+	 * @param c riferimento ad oggetto Item
+	 * @param i indice di tuple
+	 */
 	void add(Item c,int i) {
 		tuple[i]=c;
 	}
@@ -50,7 +55,7 @@ public class Tuple {
 	 * @param clusteredData indice di riga
 	 * @return
 	 */
-	public double avgDistance(Data data, int clusteredData[]){ 
+	public double avgDistance(Data data, Integer clusteredData[]){ 
 		double p=0.0,sumD=0.0; 
 		for(int i=0;i<clusteredData.length;i++){ 
 			//data.getItemSet(clusteredData[i]) mi restituisce la tupla di indice memorizzato in clusteredData[i]
