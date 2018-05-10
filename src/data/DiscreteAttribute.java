@@ -1,4 +1,7 @@
 package data;
+import java.util.Iterator;
+import java.util.TreeSet;
+
 import utility.ArraySet;
 
 /**
@@ -6,8 +9,8 @@ import utility.ArraySet;
  * @author sante
  *
  */
-class DiscreteAttribute extends Attribute {
-	private String values[]; // array di stringhe,una per ciascun valore del dominio discreto.
+class DiscreteAttribute extends Attribute implements Iterable<String>{
+	private TreeSet<String> values= new TreeSet<String>(); // Set di stringhe ordinato attraverso un albero.
 							// i valori del dominio sono memorizzati in values seguendo un ordine lessicografico
 	
 	/**
@@ -16,24 +19,19 @@ class DiscreteAttribute extends Attribute {
 	 * @param index identificativo numerico dell'attributo
 	 * @param values array di oggetti di tipo String che rappresentano il dominio discreto dell'attributo
 	 */
-	DiscreteAttribute(String name,int index,String values[]){
+	DiscreteAttribute(String name,int index,String value[]){
 		super(name, index);
-		this.values=values;
+		for(int i=0;i<value.length;i++) {
+			this.values.add(value[i]);
+		}
 	}
 	/**
 	 * @return dimensione di values
 	 */
 	int getNumberOfDistinctValues() {
-		return values.length;
+		return values.size();
 	}
-	/**
-	 * Restituisce values[i]
-	 * @param i posizione di un valore in values
-	 * @return valore discreto in posizione "i" di values
-	 */
-	String getValue(int i) {
-		return values[i];
-	}
+
 	/**
 	 * Determina il numero di volte che il valore v compare in corrispondenza dell'attributo
 	 * corrente(indice di colonna) negli esempi memorizzati in data e indicizzate(per riga) da idList
@@ -55,5 +53,9 @@ class DiscreteAttribute extends Attribute {
 			r++;
 		}
 		return numberOccurrences;
+	}
+	@Override
+	public Iterator<String> iterator() {
+		return values.iterator();
 	}
 }
