@@ -7,8 +7,6 @@ import data.OutOfRangeSampleSize;
 public class MainTest {
 	/**Nella guarded zone puo' essere generata un'eccezione di tipo OutOfRangeSampleSize
 	 * che viene raccolta dal gestore dell'eccezione e stampa un messaggio di errore.
-	 * 
-	 * 
 	 * Puo' essere generata anche un'eccezione di tipo NegativeArraySizeException che viene
 	 * raccolta dal gestore dell'eccezione e stampa un messaggio di errore.
 	 * @param args

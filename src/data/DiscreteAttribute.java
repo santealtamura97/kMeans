@@ -1,8 +1,9 @@
 package data;
+
 import java.util.Iterator;
+import java.util.Set;
 import java.util.TreeSet;
 
-import utility.ArraySet;
 
 /**
  * <p>Description: estende la classe Attribute e rappresenta un attributo discreto(categorico)
@@ -26,7 +27,8 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
 		}
 	}
 	/**
-	 * @return dimensione di values
+	 * Restituisce la dimensione di values
+	 * @return numero di valori discreti nel dominio dell'attributo
 	 */
 	int getNumberOfDistinctValues() {
 		return values.size();
@@ -40,20 +42,17 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
 	 * @param v valore discreto 
 	 * @return numero di occorrenze del valore discreto
 	 */
-	int frequency(Data data,ArraySet idList,String v) {
+	int frequency(Data data,Set<Integer> idList,String v) {
 		int numberOccurrences=0;
-		int r=0; 
-		while(r<data.getNumberOfExamples())
-		{
-			if(idList.get(r))
-			{
-					if(data.getAttributeValue(r,getIndex()).equals(v))
-						numberOccurrences++;		
+		Iterator<Integer> it = idList.iterator();
+		while(it.hasNext()) {
+			if(data.getAttributeValue(it.next(),getIndex()).equals(v)){
+				numberOccurrences++;
 			}
-			r++;
 		}
 		return numberOccurrences;
 	}
+		
 	@Override
 	public Iterator<String> iterator() {
 		return values.iterator();
