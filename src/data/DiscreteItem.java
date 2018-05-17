@@ -1,7 +1,7 @@
 package data;
 
 /**
- * Estende la classe Item e rappresenta una coppia Attributo,valore discreto.
+ * <p>Description: Estende la classe Item e rappresenta una coppia Attributo,valore discreto.
  * Esempio Outlook="Sunny"
  * @author sante
  *
@@ -17,7 +17,7 @@ class DiscreteItem extends Item {
 	 */
 	double distance(Object a) {
 		//verifica se il valore dell'attributo sia uguale a quello di input
-		if(this.getValue().equals(a.toString())) {
+		if(this.getValue().equals(((DiscreteItem)a).getValue()))                                                                                                                     {
 			return 0;
 		}else {
 			return 1;

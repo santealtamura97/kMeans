@@ -1,7 +1,7 @@
 package data;
 
 /**
- * Modella un'eccezione controllata da considerare qualora il numero k di cluster inserito
+ * <p>Description: Modella un'eccezione controllata da considerare qualora il numero k di cluster inserito
  * da tastiera sia maggiore rispetto al numero di controidi generabili dall'insieme di transazioni.
  * @author sante
  */

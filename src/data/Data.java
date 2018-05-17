@@ -80,6 +80,32 @@ public class Data {
 			
 			TreeSet<Example> tempData = new TreeSet<Example>();
 			
+			String outLookValues[]=new String[3];//array di stringhe
+			String humidityValues[]=new String[2];
+			String windValues[]=new String[2];
+			String playTennisValues[]=new String[2];
+			
+			outLookValues[0]="Overcast";
+			outLookValues[1]="Rain";
+			outLookValues[2]="Sunny";
+			
+			
+			humidityValues[0]="High";
+			humidityValues[1]="Normal";
+			
+			windValues[0]="Strong";
+			windValues[1]="Weak";
+			
+			playTennisValues[0]="No";
+			playTennisValues[1]="Yes";
+			
+			
+			attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
+			attributeSet.add(new ContinuousAttribute("Temperature",1,3.2,38.7));
+			attributeSet.add(new DiscreteAttribute("Humidity",2,humidityValues));
+			attributeSet.add(new DiscreteAttribute("Wind",3,windValues));
+			attributeSet.add(new DiscreteAttribute("PlayTennis",4,playTennisValues));
+			
 			Example ex0=new Example();
 			Example ex1=new Example();
 			Example ex2=new Example();
@@ -110,20 +136,20 @@ public class Data {
 			ex12.add(new String ("Overcast"));
 			ex13.add(new String ("Rain"));
 			
-			ex0.add(new String ("Hot"));
-			ex1.add(new String ("Hot"));
-			ex2.add(new String ("Hot"));
-			ex3.add(new String ("Mild"));
-			ex4.add(new String ("Cool"));
-			ex5.add(new String ("Cool"));
-			ex6.add(new String ("Cool"));
-			ex7.add(new String ("Mild"));
-			ex8.add(new String ("Cool"));
-			ex9.add(new String ("Mild"));
-			ex10.add(new String ("Mild"));
-			ex11.add(new String ("Mild"));
-			ex12.add(new String ("Hot"));
-			ex13.add(new String ("Mild"));
+			ex0.add(new Double (37.5)); 
+			ex1.add(new Double (38.7)); 
+			ex2.add(new Double (37.5)); 
+			ex3.add(new Double (20.5)); 
+			ex4.add(new Double (20.7)); 
+			ex5.add(new Double (21.2)); 
+			ex6.add(new Double (20.5)); 
+			ex7.add(new Double (21.2)); 
+			ex8.add(new Double (21.2)); 
+			ex9.add(new Double (19.8)); 
+			ex10.add(new Double (3.5)); 
+			ex11.add(new Double (3.6)); 
+			ex12.add(new Double (3.5)); 
+			ex13.add(new Double (3.2)); 
 			
 			ex0.add(new String ("High"));
 			ex1.add(new String ("High"));
@@ -188,36 +214,7 @@ public class Data {
 			
 			
 			numberOfExamples=tempData.size();
-			
-			String outLookValues[]=new String[3];//array di stringhe
-			String temperatureValues[]=new String[3];
-			String humidityValues[]=new String[2];
-			String windValues[]=new String[2];
-			String playTennisValues[]=new String[2];
-			
-			outLookValues[0]="Overcast";
-			outLookValues[1]="Rain";
-			outLookValues[2]="Sunny";
-			
-			temperatureValues[0]="Cool";
-			temperatureValues[1]="Hot";
-			temperatureValues[2]="Mild";
-			
-			humidityValues[0]="High";
-			humidityValues[1]="Normal";
-			
-			windValues[0]="Strong";
-			windValues[1]="Weak";
-			
-			playTennisValues[0]="No";
-			playTennisValues[1]="Yes";
-			
-			
-			attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
-			attributeSet.add(new DiscreteAttribute("Temperature",1,temperatureValues));
-			attributeSet.add(new DiscreteAttribute("Humidity",2,humidityValues));
-			attributeSet.add(new DiscreteAttribute("Wind",3,windValues));
-			attributeSet.add(new DiscreteAttribute("PlayTennis",4,playTennisValues));	
+				
 		}
 		
 		/**
@@ -247,10 +244,13 @@ public class Data {
 			
 		}
 		
-		/*
-		Attribute[] getAttributeSchema(){
+		/**
+		 * Restituisce lo schema degli attributi
+		 * @return attributeSet
+		 */
+		List<Attribute> getAttributeSchema(){
 			return attributeSet;
-		}*/
+		}
 		
 		/**
 		 * Crea una stringa in cui memorizza lo schema della tabella e le transazioni memorizzate in data,
@@ -280,8 +280,13 @@ public class Data {
 		 */
 		public Tuple getItemSet(int Index) {
 			Tuple tuple=new Tuple(attributeSet.size());
-			for(int i=0;i<attributeSet.size();i++)
-				tuple.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(i),(String)getAttributeValue(Index,i)),i);
+			for(int i=0;i<attributeSet.size();i++) {
+				if(attributeSet.get(i) instanceof DiscreteAttribute) {
+					tuple.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(i),(String)getAttributeValue(Index,i)),i);
+				}else if(attributeSet.get(i) instanceof ContinuousAttribute)
+					tuple.add(new ContinuosItem((ContinuousAttribute)attributeSet.get(i),(double)getAttributeValue(Index,i)),i);
+			}
+				
 			return tuple;
 		}
 		
@@ -334,13 +339,35 @@ public class Data {
 		
 	
 		/**
-		 * Restituisce computePrototype(idList, (DiscreteAttribute)attribute) 
+		 * Restituisce computePrototype(idList, (DiscreteAttribute)attribute) se attribute è un ' istanza di DiscreteAttribute
+		 * altrimenti restituisce computePrototype(idList,(ContinuousAttribute)attribute) se attribute è un ' istanza di ContinuousAttribute
 		 * @param idList insieme di indici di riga
 		 * @param attribute attributo rispetto al quale calcolare il prototipo(centroide)
 		 * @return valore centroide rispetto ad attribute
 		 */
 		Object computePrototype(Set<Integer> idList,Attribute attribute) {
-			return computePrototype(idList,(DiscreteAttribute)attribute);
+			if(attribute instanceof ContinuousAttribute)
+				return computePrototype(idList,(ContinuousAttribute)attribute);
+			return computePrototype(idList, (DiscreteAttribute)attribute); 
+			//return computePrototype(idList,(DiscreteAttribute)attribute);
+		}
+		
+		/**
+		 * Determina il valore prototipo come media dei valori osservati per attribute
+		 * nelle transazioni di data aventi indice di riga in idList
+		 * @param idList
+		 * @param attribute
+		 * @return 
+		 */
+		private double computePrototype(Set<Integer> idList,ContinuousAttribute attribute) {
+			double prototypeValue=0.0;
+			int numberOfValues=0;
+			Iterator<Integer> iterator=idList.iterator();
+			while(iterator.hasNext()) {
+				prototypeValue=prototypeValue + (double)data.get(iterator.next()).get(attribute.getIndex());
+				numberOfValues++;
+			}
+			return prototypeValue/numberOfValues;
 		}
 		
 		/**

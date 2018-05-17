@@ -5,10 +5,15 @@ import java.util.Set;
 import data.Data;
 import data.Tuple;
 
+/**
+ * <p>Description:Rappresenta un insieme di righe di data con il relativo centroide.
+ * @author sante
+ *
+ */
 public class Cluster {
 	private Tuple centroid;
 
-	private Set<Integer> clusteredData=new HashSet<Integer>();
+	private Set<Integer> clusteredData=new HashSet<Integer>(); //contiene le righe di data facenti parte del Cluster
 	
 	/*Cluster(){
 		

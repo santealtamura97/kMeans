@@ -15,6 +15,9 @@ public class Tuple {
 		tuple=new Item[size];
 	}
 	
+	/**
+	 * Restituisce la lunghezza della tupla
+	 */
 	public int getLength() {
 		return tuple.length;
 	}

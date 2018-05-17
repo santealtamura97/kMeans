@@ -3,6 +3,11 @@ import data.Data;
 import data.OutOfRangeSampleSize;
 import data.Tuple;
 
+/**
+ * <p>Description: Rappresenta un insieme di cluster (determinati da  k-means) 
+ * @author sante
+ *
+ */
 public class ClusterSet {
 	private Cluster C[];
 	private int i=0; //posizione valida per la memorizzazione di un nuovo cluster in C

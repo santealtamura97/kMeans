@@ -9,7 +9,8 @@ package data;
  */
 class ContinuousAttribute extends Attribute {
 	private double max;
-	private double min;// rappresentano gli estremi dell'intervallo di valori(dominio) che l'attributo può realmente assumere
+	private double min;// rappresentano gli estremi dell'intervallo di valori(dominio) 
+	//che l'attributo può realmente assumere
 	
 	/**
 	 * Invoca il costruttore della classe madre e inizializza i membri aggiunti per estensione

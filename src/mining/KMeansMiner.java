@@ -2,6 +2,11 @@ package mining;
 import data.Data;
 import data.OutOfRangeSampleSize;
 
+/**
+ * <p>Description: Include l'implementazione dell’algoritmo kmeans
+ * @author sante
+ *
+ */
 public class KMeansMiner {
 	private ClusterSet C;
 	/**
@@ -13,7 +18,7 @@ public class KMeansMiner {
 	}
 	
 	/**
-	 * Restituisce C
+	 * Restituisce il clusterSet C
 	 * @return C
 	 */
 	public ClusterSet getC() {

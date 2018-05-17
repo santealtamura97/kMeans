@@ -8,7 +8,6 @@ import java.util.TreeSet;
 /**
  * <p>Description: estende la classe Attribute e rappresenta un attributo discreto(categorico)
  * @author sante
- *
  */
 class DiscreteAttribute extends Attribute implements Iterable<String>{
 	private TreeSet<String> values= new TreeSet<String>(); // Set di stringhe ordinato attraverso un albero.
