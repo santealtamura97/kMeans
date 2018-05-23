@@ -1,5 +1,6 @@
 package mining;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import data.Data;
@@ -10,7 +11,7 @@ import data.Tuple;
  * @author sante
  *
  */
-public class Cluster {
+public class Cluster implements Serializable{
 	private Tuple centroid;
 
 	private Set<Integer> clusteredData=new HashSet<Integer>(); //contiene le righe di data facenti parte del Cluster

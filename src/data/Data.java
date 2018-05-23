@@ -1,12 +1,22 @@
 package data;
 import java.util.List;
-
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+
+import database.DatabaseConnectionException;
+import database.DbAccess;
+import database.EmptySetException;
+import database.Example;
+import database.NoValueException;
+import database.QUERY_TYPE;
+import database.TableData;
+import database.TableSchema;
+import database.TableSchema.Column;
 
 /**
  * <p>Description:La classe Data modella l'insieme di transazioni (o tuple)
@@ -17,205 +27,37 @@ public class Data {
 		private int numberOfExamples;
 		private List<Attribute> attributeSet = new LinkedList<Attribute>(); 
 		
-		class Example implements Comparable<Example>{
-			private List<Object> example=new ArrayList<Object>();//array di Object che rappresentano la singola transazione(o riga di una tabella)
-			
-			/**
-			 * Aggiunge o in coda ad example
-			 * @param o riferimento ad oggetto di classe Object
-			 */
-			private void add(Object o) {
-				example.add(o);
-			}
-			
-			/**
-			 * 
-			 * @param i riferimento collezionato in example
-			 * @return i-esimo riferimento collezionato in example
-			 */
-			private Object get(int i) {
-				return example.get(i);
-			}
-			
-			/**
-			 * restituisce 0, -1, 1  sulla base del risultato del confronto. 
-			 * 0 se  i due esempi includono gli stessi valori. 
-			 * Altrimenti il risultato del compareTo(...) invocato sulla prima coppia di valori in disaccordo. 
-			 */
-			public int compareTo(Example ex) {
-				if(!this.toString().equals(ex.toString())) {
-					String[] parts1=this.toString().split(" ");
-					String[] parts2=ex.toString().split(" ");
-					
-					for(int i=0;i<parts1.length;i++) {
-						if(!parts1[i].equals(parts2[i])) {
-							return parts1[i].compareTo(parts2[i]);
-						}		
-					}
-				}
-				return 0;
-			}
-			/**
-			 * Restituisce una stringa che rappresenta lo stato di example
-			 */
-			public String toString() {
-				String str="";
-				for(Object el : this.example) {
-					str+=el.toString()+" ";
-				}
-				return str;
-			}
-		}
-		
 			/**
 			 * Inizializza l'ArrayList data con transazioni di esempio  
-			 * (in questo momento, 14 esempi e 5 attributi come riportato nella 
-			 * tabella sottostante);  Inizializza attributeSet creando cinque 
+			 * (in questo momento, 14 esempi e 5 attributi;Inizializza attributeSet creando cinque 
 			 * oggetti di tipo DiscreteAttribute, uno per ciascun attributo  
 			 * (nella tabella sottostante).
 			 * Inizializza numberOfExamples. 
+			 * @throws EmptySetException 
+			 * @throws SQLException 
+			 * @throws DatabaseConnectionException 
 			 */
-		 	public Data(){
-			//data
-			
-			TreeSet<Example> tempData = new TreeSet<Example>();
-			
-			String outLookValues[]=new String[3];//array di stringhe
-			String humidityValues[]=new String[2];
-			String windValues[]=new String[2];
-			String playTennisValues[]=new String[2];
-			
-			outLookValues[0]="Overcast";
-			outLookValues[1]="Rain";
-			outLookValues[2]="Sunny";
-			
-			
-			humidityValues[0]="High";
-			humidityValues[1]="Normal";
-			
-			windValues[0]="Strong";
-			windValues[1]="Weak";
-			
-			playTennisValues[0]="No";
-			playTennisValues[1]="Yes";
-			
-			
-			attributeSet.add(new DiscreteAttribute("Outlook",0, outLookValues));
-			attributeSet.add(new ContinuousAttribute("Temperature",1,3.2,38.7));
-			attributeSet.add(new DiscreteAttribute("Humidity",2,humidityValues));
-			attributeSet.add(new DiscreteAttribute("Wind",3,windValues));
-			attributeSet.add(new DiscreteAttribute("PlayTennis",4,playTennisValues));
-			
-			Example ex0=new Example();
-			Example ex1=new Example();
-			Example ex2=new Example();
-			Example ex3=new Example();
-			Example ex4=new Example();
-			Example ex5=new Example();
-			Example ex6=new Example();
-			Example ex7=new Example();
-			Example ex8=new Example();
-			Example ex9=new Example();
-			Example ex10=new Example();
-			Example ex11=new Example();
-			Example ex12=new Example();
-			Example ex13=new Example();
-			
-			ex0.add(new String ("Sunny"));
-			ex1.add(new String ("Sunny"));
-			ex2.add(new String ("Overcast"));
-			ex3.add(new String ("Rain"));
-			ex4.add(new String ("Rain"));
-			ex5.add(new String ("Rain"));
-			ex6.add(new String ("Overcast"));
-			ex7.add(new String ("Sunny"));
-			ex8.add(new String ("Sunny"));
-			ex9.add(new String ("Rain"));
-			ex10.add(new String ("Sunny"));
-			ex11.add(new String ("Overcast"));
-			ex12.add(new String ("Overcast"));
-			ex13.add(new String ("Rain"));
-			
-			ex0.add(new Double (37.5)); 
-			ex1.add(new Double (38.7)); 
-			ex2.add(new Double (37.5)); 
-			ex3.add(new Double (20.5)); 
-			ex4.add(new Double (20.7)); 
-			ex5.add(new Double (21.2)); 
-			ex6.add(new Double (20.5)); 
-			ex7.add(new Double (21.2)); 
-			ex8.add(new Double (21.2)); 
-			ex9.add(new Double (19.8)); 
-			ex10.add(new Double (3.5)); 
-			ex11.add(new Double (3.6)); 
-			ex12.add(new Double (3.5)); 
-			ex13.add(new Double (3.2)); 
-			
-			ex0.add(new String ("High"));
-			ex1.add(new String ("High"));
-			ex2.add(new String ("High"));
-			ex3.add(new String ("High"));
-			ex4.add(new String ("Normal"));
-			ex5.add(new String ("Normal"));
-			ex6.add(new String ("Normal"));
-			ex7.add(new String ("High"));
-			ex8.add(new String ("Normal"));
-			ex9.add(new String ("Normal"));
-			ex10.add(new String ("Normal"));
-			ex11.add(new String ("High"));
-			ex12.add(new String ("Normal"));
-			ex13.add(new String ("High"));
-			
-			ex0.add(new String ("Weak"));
-			ex1.add(new String ("Strong"));
-			ex2.add(new String ("Weak"));
-			ex3.add(new String ("Weak"));
-			ex4.add(new String ("Weak"));
-			ex5.add(new String ("Strong"));
-			ex6.add(new String ("Strong"));
-			ex7.add(new String ("Weak"));
-			ex8.add(new String ("Weak"));
-			ex9.add(new String ("Weak"));
-			ex10.add(new String ("Strong"));
-			ex11.add(new String ("Strong"));
-			ex12.add(new String ("Weak"));
-			ex13.add(new String ("Strong"));
-			
-			ex0.add(new String ("No"));
-			ex1.add(new String ("No"));
-			ex2.add(new String ("Yes"));
-			ex3.add(new String ("Yes"));
-			ex4.add(new String ("Yes"));
-			ex5.add(new String ("No"));
-			ex6.add(new String ("Yes"));
-			ex7.add(new String ("No"));
-			ex8.add(new String ("Yes"));
-			ex9.add(new String ("Yes"));
-			ex10.add(new String ("Yes"));
-			ex11.add(new String ("Yes"));
-			ex12.add(new String ("Yes"));
-			ex13.add(new String ("No"));
-			
-			tempData.add(ex0);
-			tempData.add(ex1);
-			tempData.add(ex2);
-			tempData.add(ex3);
-			tempData.add(ex4);
-			tempData.add(ex5);
-			tempData.add(ex6);
-			tempData.add(ex7);
-			tempData.add(ex8);
-			tempData.add(ex9);
-			tempData.add(ex10);
-			tempData.add(ex11);
-			tempData.add(ex12);
-			tempData.add(ex13);
-			data = new ArrayList<Example> (tempData);
-			
-			
-			numberOfExamples=tempData.size();
+			@SuppressWarnings("unchecked")
+			public Data(String table) throws SQLException, EmptySetException, DatabaseConnectionException , NoValueException{
+				TableData tableData = new TableData(new DbAccess());
+				data = tableData.getDistinctTransazioni(table);
+				TableSchema tableSchema = new TableSchema(new DbAccess(),table);
+				numberOfExamples=data.size();
 				
-		}
+				
+				QUERY_TYPE min,max;
+				min = QUERY_TYPE.MIN;
+				max = QUERY_TYPE.MAX;
+				
+				for (int i=0;i<tableSchema.getNumberOfAttributes();i++) {
+					if(!tableSchema.getColumn(i).isNumber()) {
+						attributeSet.add(new DiscreteAttribute(tableSchema.getColumn(i).getColumnName(),i,(TreeSet)tableData.getDistinctColumnValues(table, tableSchema.getColumn(i))));
+					}else {
+						attributeSet.add(new ContinuousAttribute(tableSchema.getColumn(i).getColumnName(),i,(double)tableData.getAggregateColumnValue(table,tableSchema.getColumn(i),min),(double)tableData.getAggregateColumnValue(table,tableSchema.getColumn(i),max)));
+					}
+						
+				}	
+			}
 		
 		/**
 		 * restituisce numberOfExamples
@@ -284,7 +126,7 @@ public class Data {
 				if(attributeSet.get(i) instanceof DiscreteAttribute) {
 					tuple.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(i),(String)getAttributeValue(Index,i)),i);
 				}else if(attributeSet.get(i) instanceof ContinuousAttribute)
-					tuple.add(new ContinuosItem((ContinuousAttribute)attributeSet.get(i),(double)getAttributeValue(Index,i)),i);
+					tuple.add(new ContinuosItem((ContinuousAttribute)attributeSet.get(i),(Double)getAttributeValue(Index,i)),i);
 			}
 				
 			return tuple;

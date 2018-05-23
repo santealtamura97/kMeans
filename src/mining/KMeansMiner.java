@@ -1,4 +1,12 @@
 package mining;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import data.Data;
 import data.OutOfRangeSampleSize;
 
@@ -7,7 +15,7 @@ import data.OutOfRangeSampleSize;
  * @author sante
  *
  */
-public class KMeansMiner {
+public class KMeansMiner implements Serializable{
 	private ClusterSet C;
 	/**
 	 * Crea l'oggetto array riferito da C
@@ -15,6 +23,20 @@ public class KMeansMiner {
 	 */
 	public KMeansMiner(int k){
 		C=new ClusterSet(k);
+	}
+	
+	/**
+	 * Apre il file identificato da fileName, legge l'oggetto ivi memorizzato e lo assegna a C. 
+	 * @param fileName percorso + nome file
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	public KMeansMiner(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException{
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName)); 
+		KMeansMiner K=(KMeansMiner)in.readObject();
+		C=K.getC();
+		in.close();
 	}
 	
 	/**
@@ -53,5 +75,17 @@ public class KMeansMiner {
 			C.updateCentroids(data); 
 		}while(changedCluster);
 		return numberOfIterations;
+	}
+	
+	/**
+	 * Apre il file identificato da fileName e sarva l'oggetto riferito da C in tale file. 
+	 * @param fileName percorso + nome file
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public void save(String fileName) throws FileNotFoundException,IOException{
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName)); 
+		out.writeObject(this);
+		out.close();
 	}
 }

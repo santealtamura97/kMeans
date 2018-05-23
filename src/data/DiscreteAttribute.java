@@ -19,11 +19,10 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
 	 * @param index identificativo numerico dell'attributo
 	 * @param values array di oggetti di tipo String che rappresentano il dominio discreto dell'attributo
 	 */
-	DiscreteAttribute(String name,int index,String value[]){
+	DiscreteAttribute(String name,int index,TreeSet<String> value){
 		super(name, index);
-		for(int i=0;i<value.length;i++) {
-			this.values.add(value[i]);
-		}
+		for(String s : value)
+			this.values.add(s);	
 	}
 	/**
 	 * Restituisce la dimensione di values
@@ -51,7 +50,9 @@ class DiscreteAttribute extends Attribute implements Iterable<String>{
 		}
 		return numberOccurrences;
 	}
-		
+	
+	//L'interfaccia Iterator<String> è implementata da TreeSet<String> che implementa i
+	//metodi hasnext ,next e remove(se è supportato).
 	@Override
 	public Iterator<String> iterator() {
 		return values.iterator();

@@ -1,5 +1,6 @@
 package data;
 
+import java.io.Serializable;
 import java.util.Set;
 
 
@@ -8,7 +9,7 @@ import java.util.Set;
  * <p>Description:Modella un generico item(coppia (attributo,valore),per esempio Outlook="Sunny");
  * @author sante
  */
-public abstract class Item {
+public abstract class Item implements Serializable{
 	private Attribute attribute; //attributo coinvolto nell'item
 	private Object value; //valore assegnato all'attributo
 	
