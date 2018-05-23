@@ -1,10 +1,13 @@
 package data;
+
+import java.io.Serializable;
+
 /**
  * <p>Description: rappresenta una tupla come una coppia attributo-valore
  * @author sante
  *
  */
-public class Tuple {
+public class Tuple implements Serializable{
 	private Item[] tuple;
 	
 	/**

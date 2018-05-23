@@ -1,11 +1,14 @@
 package data;
+
+import java.io.Serializable;
+
 /**
  * <p>Description:la classe Attributo modella le entità attributo,
  * non può essere istanziata e ha lo scopo di essere richiamata 
  * come superclasse per una nuova classe.
  * @author sante
  */
-abstract class Attribute {
+abstract class Attribute implements Serializable{
 	private String name; //nome simbolico dell'attributo
 	private int index; //identificativo numerico dell'attributo
 	
