@@ -78,7 +78,7 @@ public class KMeansMiner implements Serializable{
 	}
 	
 	/**
-	 * Apre il file identificato da fileName e sarva l'oggetto riferito da C in tale file. 
+	 * Apre il file identificato da fileName e salva l'oggetto riferito da C in tale file. 
 	 * @param fileName percorso + nome file
 	 * @throws FileNotFoundException
 	 * @throws IOException
@@ -88,4 +88,9 @@ public class KMeansMiner implements Serializable{
 		out.writeObject(this);
 		out.close();
 	}
+	
+	public String toString() {
+		return C.toString();
+	}
+	
 }

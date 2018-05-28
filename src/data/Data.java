@@ -28,22 +28,23 @@ public class Data {
 		private List<Attribute> attributeSet = new LinkedList<Attribute>(); 
 		
 			/**
-			 * Inizializza l'ArrayList data con transazioni di esempio  
-			 * (in questo momento, 14 esempi e 5 attributi;Inizializza attributeSet creando cinque 
-			 * oggetti di tipo DiscreteAttribute, uno per ciascun attributo  
-			 * (nella tabella sottostante).
+			 * Inizializza l'ArrayList data con transazioni di table 
+			 * Inizializza attributeSet creando oggetti di tipo DiscreteAttribute 
+			 * oppure ContinuousAttribute uno per ciascun attributo  
 			 * Inizializza numberOfExamples. 
+			 * @param nome della tabella del databas relazionale
 			 * @throws EmptySetException 
 			 * @throws SQLException 
 			 * @throws DatabaseConnectionException 
 			 */
 			@SuppressWarnings("unchecked")
 			public Data(String table) throws SQLException, EmptySetException, DatabaseConnectionException , NoValueException{
+				
 				TableData tableData = new TableData(new DbAccess());
 				data = tableData.getDistinctTransazioni(table);
+				
 				TableSchema tableSchema = new TableSchema(new DbAccess(),table);
 				numberOfExamples=data.size();
-				
 				
 				QUERY_TYPE min,max;
 				min = QUERY_TYPE.MIN;
