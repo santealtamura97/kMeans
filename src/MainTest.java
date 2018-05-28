@@ -38,7 +38,6 @@ public class MainTest {
 		System.out.print("Nome archivio:");
 		fileName=Keyboard.readString();
 		return new KMeansMiner(fileName+".dmp");
-		
 	}
 	public static void main(String[] args) {
 		
@@ -51,26 +50,29 @@ public class MainTest {
 						KMeansMiner kmeans=learningFromFile();
 						System.out.println(kmeans);
 					} catch (FileNotFoundException e1) {
-						e1.printStackTrace();
+						System.out.println("Il file cercato non e' stato trovato");
 					} catch (IOException e1) {
-						e1.printStackTrace();
+						System.out.println("Inserire i dati correttamente");
 					} catch (ClassNotFoundException e1) {
-						e1.printStackTrace();
+						System.out.println("Nessuna definizione per la classe con il nome specificato e'stata trovata.");
 					}
 					break;
 				case 2:
-					
 					Data data=null;
+					String dbName="";
 					try {
-						data =new Data("playtennis");
+						System.out.println("Inserire il nome della tabella del database mapDB: ");
+						dbName=Keyboard.readString();
+						data =new Data(dbName);
 						System.out.println(data);
-					}catch(EmptySetException e) {
-						System.err.println(e.toString());
-					}catch(SQLException e) {
-						System.err.println(e.toString());
 					}catch(DatabaseConnectionException e) {
 						System.err.println(e.toString());
 					}catch(NoValueException e) {
+						System.err.println(e.toString());
+					}catch(EmptySetException e) {
+						System.out.println(e.toString());
+						break;					
+					}catch(SQLException e) {
 						System.err.println(e.toString());
 					}
 					char answer='y';
@@ -92,11 +94,9 @@ public class MainTest {
 							try {
 								kmeans.save(fileName);
 							} catch (FileNotFoundException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								System.out.println("Errore durante il salvataggio");
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								System.out.println("Errore durante la lettura del nome del file");
 							}
 							System.out.println("Fine operazioni di salvataggio!");
 						}

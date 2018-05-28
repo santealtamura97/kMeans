@@ -24,6 +24,13 @@ public class DbAccess {
 	
 	Connection conn;//gestisce una connessione 
 	
+	/**
+	 * Impartisce al class loader l’ordine di caricare il driver mysql, 
+	 * inizializza la connessione riferita da conn. Il metodo solleva e propaga
+	 * una eccezione di tipo DatabaseConnectionException in caso di fallimento 
+	 * nella connessione al database. 
+	 * @throws DatabaseConnectionException
+	 */
 	private void initConnection() throws DatabaseConnectionException {
 		try {
 			Class.forName(DRIVER_CLASS_NAME);//impartisce al class loader l'ordine di caricare il driver mysql per la gestione di oggetti driver
@@ -35,22 +42,19 @@ public class DbAccess {
 			//inizializzo la connessione riferita da conn
 			conn=(Connection)DriverManager.getConnection(DBMS + "://" + SERVER + ":" + PORT + "/" + DATABASE,USER_ID,PASSWORD);
 		}catch(SQLException ex) {
-			System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
+			throw new DatabaseConnectionException();
 		}
 	}
 	
-	Connection getConnection(){
-		try {
-			this.initConnection();	
-		}catch(DatabaseConnectionException e) {
-			System.out.println(e.toString());
-		}
-
+	Connection getConnection() throws DatabaseConnectionException{
+		this.initConnection();	
 		return conn;
 	}
 	
+	/**
+	 * Chiude la connessione
+	 * @throws SQLException
+	 */
 	void closeConnection() throws SQLException {
 		conn.close();
 	}
