@@ -59,7 +59,7 @@ public class Cluster implements Serializable{
 
 	/**
 	 * Rimuove la tupla che ha cambiato il cluster
-	 * @param id indice di riga
+	 * @param id indice di riga della tupla
 	 */
 	void removeTuple(int id){
 		clusteredData.remove(id);
@@ -68,10 +68,9 @@ public class Cluster implements Serializable{
 	public String toString(){
 		String str="Centroid=(";
 		for(int i=0;i<centroid.getLength();i++)
-			str+=centroid.get(i);
-		str+=")";
+			str+=" "+centroid.get(i);
+		str+=")\n";
 		return str;
-		
 	}
 	
 	public String toString(Data data){

@@ -84,7 +84,7 @@ public class TableData {
 	 * @return Insieme di valori distinti ordinati in modalità ascendente che l’attributo identificato da nome column assume nella tabella identificata dal nome table. 
 	 * @throws SQLException in presenza di errori nella esecuzione della query
 	 */
-	public Set<Object> getDistinctColumnValues(String table,Column column) throws SQLException{
+	public Set<Object> getDistinctColumnValues(String table,Column column) throws SQLException,DatabaseConnectionException{
 		Statement s = db.getConnection().createStatement();
 		String query="SELECT DISTINCT " + column.getColumnName() + " from " + table;
 		ResultSet rs = s.executeQuery(query);
@@ -104,13 +104,13 @@ public class TableData {
 	 * propaga una NoValueException se il resultset è vuoto o il valore
 	 * calcolato è pari a null
 	 * @param table  nome di tabella
-	 * @param column nome di colonna 
+	 * @param column nome di colonna
 	 * @param aggregate operatore SQL di aggregazione (min,max) 
 	 * @return aggregato cercato
 	 * @throws SQLException in presenza di errori nella esecuzione della query
 	 * @throws NoValueException se il resultset è vuoto o il valore calcolato è pari a null
 	 */
-	public  Object getAggregateColumnValue(String table,Column column,QUERY_TYPE aggregate) throws SQLException,NoValueException{
+	public  Object getAggregateColumnValue(String table,Column column,QUERY_TYPE aggregate) throws SQLException,NoValueException,DatabaseConnectionException{
 		Statement s = db.getConnection().createStatement();
 		String query;
 		if(aggregate==aggregate.MAX) {
@@ -120,10 +120,12 @@ public class TableData {
 		}
 		
 			ResultSet rs = s.executeQuery(query);
-			double d=0.0;
+			Double d=null;
 				while(rs.next()) {
 					d=rs.getDouble(1);//metto 1 perchè ci puo' essere solo una tupla
 				}
+			if(d==null)
+				throw new NoValueException(); 
 				
 			s.close();
 			db.closeConnection();

@@ -13,7 +13,7 @@ import data.Tuple;
 public class ClusterSet  implements Serializable{
 	private Cluster C[];
 	private int i=0; //posizione valida per la memorizzazione di un nuovo cluster in C
-	
+	private String examples;
 	/**
 	 * Creo l'oggetto array riferito da C
 	 * @param k numero di cluster da generare(k means)
@@ -93,20 +93,17 @@ public class ClusterSet  implements Serializable{
 	 * Restituisce una stringa fatta da ciascun centroide dell'insieme dei cluster
 	 */
 	public String toString() {
-		String str="";
-		for (int j=0;j<i;j++) {
-			str=str+" "+C[j].toString();
-		}
-		return str;
+		return examples;
 	}
 	
 	public String toString(Data data) {
 		String str="";
 		for(int i=0;i<C.length;i++) {
 			if(C[i]!=null) {
-				str+=i+":"+C[i].toString(data) +"\n";
+				str+="\n\n"+i+":"+C[i].toString(data) +"\n";
 			}
 		}
+	examples=str;
 	return str;
 	}
 }
