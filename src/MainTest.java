@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import data.Data;
 import mining.KMeansMiner;
+import server.MultiServer;
 import keyboardinput.Keyboard;
 import data.OutOfRangeSampleSize;
 import database.DatabaseConnectionException;
@@ -39,7 +40,8 @@ public class MainTest {
 		fileName=Keyboard.readString();
 		return new KMeansMiner(fileName+".dmp");
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		
 		
 		do{
 			int menuAnswer=menu();
