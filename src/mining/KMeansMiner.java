@@ -91,6 +91,5 @@ public class KMeansMiner implements Serializable{
 	
 	public String toString() {
 		return C.toString();
-	}
-	
+	}	
 }

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
 
-import server.MultiServer;
+
 
 public class DbAccess {
 	//Driver manager  che gestisce dinamicamente tutti gli oggetti driver 
@@ -36,9 +36,8 @@ public class DbAccess {
 	 */
 	private void initConnection() throws DatabaseConnectionException {
 		try {
-			ClassLoader classLoader = MultiServer.class.getClassLoader();
-			Class aClass = classLoader.loadClass(DRIVER_CLASS_NAME);
-			//Class.forName(DRIVER_CLASS_NAME);//impartisce al class loader l'ordine di caricare il driver mysql per la gestione di oggetti driver
+			
+			Class.forName(DRIVER_CLASS_NAME);//impartisce al class loader l'ordine di caricare il driver mysql per la gestione di oggetti driver
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
