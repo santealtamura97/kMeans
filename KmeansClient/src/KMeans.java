@@ -69,6 +69,7 @@ public class KMeans extends JFrame{
 				clusterOutput.setColumns(30);
 				clusterOutput.setRows(30);
 				clusterOutput.setAutoscrolls(true);
+				clusterOutput.setEditable(false);
 				
 				JPanel upPanel = new JPanel();
 				JPanel downPanel = new JPanel();	
