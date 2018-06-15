@@ -3,10 +3,7 @@ package database;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 import com.mysql.jdbc.Connection;
-
-
 
 public class DbAccess {
 	//Driver manager  che gestisce dinamicamente tutti gli oggetti driver 
@@ -25,7 +22,7 @@ public class DbAccess {
 	
 	final String PASSWORD = "map";// contiene la password di autenticazione per l’utente identificato da  USER_ID 
 	
-	Connection conn;//gestisce una connessione 
+	Connection conn;//gestisce una connessione
 	
 	/**
 	 * Impartisce al class loader l’ordine di caricare il driver mysql, 

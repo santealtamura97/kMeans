@@ -192,7 +192,6 @@ public class Data {
 			if(attribute instanceof ContinuousAttribute)
 				return computePrototype(idList,(ContinuousAttribute)attribute);
 			return computePrototype(idList, (DiscreteAttribute)attribute); 
-			//return computePrototype(idList,(DiscreteAttribute)attribute);
 		}
 		
 		/**
