@@ -1,7 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,9 +11,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.net.URL;
 import java.rmi.ServerException;
-
 import javax.swing.ImageIcon;
-import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,14 +23,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- *  <p>Description:Tale classe definisce una JAPPLET
+ * <p>Description:Tale classe definisce una JAPPLET
  * @author sante
  */
-public class KMeans extends JApplet{
+public class KMeans extends JFrame{
 	private ObjectOutputStream out; 
 	private ObjectInputStream in ;
 	Socket socket;
 	
+	public static void main(String [] args) {
+		KMeans Applet = new KMeans();
+		Applet.init();
+	}	
 	/**
 	 * Inizializza la componente grafica della interfaccia grafica  istanziando un oggetto della classe  
 	 * JtabbedPane e aggiungendolo al container della JApplet
@@ -44,7 +43,9 @@ public class KMeans extends JApplet{
 		TabbedPane tab=new TabbedPane();
 		getContentPane().setLayout(new GridLayout(1,1));
 		getContentPane().add(tab);
-		this.setSize(800,800);	
+		this.setSize(800,800);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.show();
 	}
 	private class TabbedPane extends JPanel{
 		private JPanelCluster panelDB;
@@ -77,8 +78,10 @@ public class KMeans extends JApplet{
 				
 				upPanel.add(nameTableText);
 				upPanel.add(tableText);
-				upPanel.add(nameKText);
-				upPanel.add(kText);
+				if(buttonName.equals("MINE")) {
+					upPanel.add(nameKText);
+					upPanel.add(kText);
+				}
 				downPanel.add(executeButton);
 				
 				this.setLayout(new BorderLayout());
@@ -208,7 +211,7 @@ public class KMeans extends JApplet{
 				//k=new Integer(panelDB.kText.getText()).intValue(); 
 				k = Integer.parseInt(panelDB.kText.getText());
 				} catch(NumberFormatException e){   
-					JOptionPane.showMessageDialog(this,"Numero di cluster K non valido.");   
+					JOptionPane.showMessageDialog(this,"Numero di cluster K non valido.");
 					return; 
 				}  
 			try {
