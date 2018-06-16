@@ -40,7 +40,6 @@ public class MultiServer {
 				try {
 					new ServerOneClient(socket);
 				} catch(IOException e) {
-					System.out.println("Chiusura socket");
 					socket.close();
 				}
 			}
